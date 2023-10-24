@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Boss from "../assets/boss-hog.png";
 import BabyHog from "./BabyHog";
-// import offspring from "../data.js"
+import offspring from "../data.js"
 
 function HogBoss() {
   const [eyeColor, setEyeColor] = useState("blue");
@@ -10,8 +10,19 @@ function HogBoss() {
     setEyeColor(e.target.value);
   }
 
+  const babyHog = offspring.map((hog) => {
+    return <BabyHog key={hog.id} eye={eyeColor} name={hog.name} hobby={hog.hobby}/>;
+  })
+
   return (
     <div>
+      <input
+        type="radio"
+        name="eyeColor"
+        value="normal"
+        onChange={handleChangeEyeColor}
+      />
+      Normal<br></br>
       <input
         type="radio"
         name="eyeColor"
@@ -40,9 +51,7 @@ function HogBoss() {
         <img id="boss-blaster" src={Boss} alt="" />
       </div>
       <ul className="hoglist">
-        <BabyHog />
-        <BabyHog />
-        <BabyHog />
+        {babyHog}
       </ul>
     </div>
   );
